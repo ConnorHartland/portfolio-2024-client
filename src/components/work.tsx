@@ -5,7 +5,7 @@ const ExperienceTimeline = () => {
 		<div className=" text-white py-16">
 			<h2 className="text-4xl text-center mb-12">Work Experience</h2>
 
-			<div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-start space-y-12 lg:space-y-0 lg:space-x-12 px-8 ">
+			<div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-start space-y-12 lg:space-y-0 lg:space-x-12 px-8">
 				{/* Horizontal Line */}
 
 				{workExperience.map((experience, index) => (
