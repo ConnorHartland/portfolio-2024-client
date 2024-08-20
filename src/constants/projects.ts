@@ -2,6 +2,15 @@ import { Project } from "../types"; // Adjust the path as necessary
 
 export const projects: Project[] = [
 	{
+		title: "Docker 101",
+		description:
+			"Dockerizing a MERN stack application. This project is a simple MERN stack application that is dockerized. The frontend is built with React.JS and the backend is built with Node.JS and Express.JS. The database is MongoDB.",
+
+		githubLink: "https://github.com/ConnorHartland/portfolio-2024-client",
+		technologies: ["Docker", "MongoDB", "Express.JS", "React.JS"],
+		// blogPost: "blogs/airbnb-clone.md",
+	},
+	{
 		title: "AirBNB Clone",
 		description:
 			"A clone of AirBNB using Next.JS and Tailwind CSS to example a complex layout. This project has a backend implementation with Firebase making it a fullstack project.",
@@ -20,7 +29,7 @@ export const projects: Project[] = [
 			"https://i.ibb.co/54QvbC3/Screen-Shot-2022-02-14-at-11-39-45-AM.png",
 		liveLink: "https://hartinstagram.vercel.app/",
 		githubLink: "https://github.com/ConnorHartland/instagram-clone",
-		technologies: ["Next.JS", "Tailwind CSS"],
+		technologies: ["Next.JS", "Tailwind CSS", "Firebase | Firestore"],
 	},
 	{
 		title: "Spotify 2",
