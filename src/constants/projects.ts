@@ -10,7 +10,7 @@ export const projects: Project[] = [
 		liveLink: "https://air-bnb-clone-three.vercel.app/",
 		githubLink: "https://github.com/ConnorHartland/AirBNB-Clone",
 		technologies: ["Next.JS", "Tailwind CSS", "Firebase"],
-		blogPost: "blogs/airbnb-clone.md",
+		// blogPost: "blogs/airbnb-clone.md",
 	},
 	{
 		title: "Instagram Clone",
