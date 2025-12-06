@@ -106,7 +106,7 @@ describe('TypeScript Strict Mode Compliance', () => {
     // Remove comments from JSONC (JSON with Comments)
     const jsonContent = tsconfigContent
       .split('\n')
-      .map(line => {
+      .map((line: string) => {
         // Remove single-line comments
         const commentIndex = line.indexOf('//');
         if (commentIndex !== -1) {

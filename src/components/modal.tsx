@@ -14,7 +14,7 @@ interface CodeComponentProps {
 	inline?: boolean;
 	className?: string;
 	children?: React.ReactNode;
-	[key: string]: unknown;
+	node?: unknown;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, markdownFile }) => {
