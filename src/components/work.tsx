@@ -1,46 +1,84 @@
-import { workExperience } from "../constants/work"; // Adjust the path based on your structure
+import { workExperience } from "../constants/work";
+import SafeImage from "./safe-image";
 
 const ExperienceTimeline = () => {
+	// Sort experiences by start date in reverse chronological order (most recent first)
+	const sortedExperiences = [...workExperience].sort((a, b) => {
+		// Extract year from dates string (format: "Mon YYYY - Present" or "Mon YYYY - Mon YYYY")
+		const getStartDate = (dateStr: string) => {
+			const parts = dateStr.split(" - ")[0].split(" ");
+			const month = parts[0];
+			const year = parseInt(parts[1]);
+			const monthMap: { [key: string]: number } = {
+				Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+				Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+			};
+			return new Date(year, monthMap[month] || 0);
+		};
+		
+		return getStartDate(b.dates).getTime() - getStartDate(a.dates).getTime();
+	});
+
 	return (
-		<div className=" text-white py-16">
-			<h2 className="text-4xl text-center mb-12">Work Experience</h2>
+		<article className="py-16 lg:py-24">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+				<h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-slate-900">
+					Work Experience
+				</h2>
 
-			<div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-start space-y-12 lg:space-y-0 lg:space-x-12 px-8">
-				{/* Horizontal Line */}
+				<div className="space-y-4 sm:space-y-6 lg:space-y-8" role="list" aria-label="Work experience entries">
+					{sortedExperiences.map((experience, index) => (
+						<article
+							key={index}
+							className="bg-white border border-slate-200 rounded-xl p-4 sm:p-6 lg:p-8 hover:shadow-md transition-shadow duration-300"
+							role="listitem"
+						>
+							{/* Card Header - responsive layout for mobile */}
+							<header className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-4">
+								<SafeImage
+									src={experience.image}
+									alt={`${experience.companyName} company logo`}
+									className="w-12 h-12 sm:w-16 sm:h-16 object-contain flex-shrink-0"
+								/>
+								<div className="flex-grow">
+									<div className="flex items-center gap-2 flex-wrap">
+										<h3 className="text-xl font-semibold text-slate-900">
+											{experience.companyName}
+										</h3>
+										{experience.current && (
+											<span 
+												className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full"
+												aria-label="Current position"
+											>
+												Current
+											</span>
+										)}
+									</div>
+									<p className="text-lg text-blue-600 font-medium mt-1">
+										{experience.role}
+									</p>
+									<p className="flex flex-wrap gap-3 mt-2 text-sm text-slate-600">
+										<time>{experience.dates}</time>
+										<span aria-hidden="true">•</span>
+										<span>{experience.location}</span>
+									</p>
+								</div>
+							</header>
 
-				{workExperience.map((experience, index) => (
-					<div
-						key={index}
-						className={`relative group ${
-							experience.current ? "border-white border-4" : ""
-						} bg-gray-800 hover:bg-gray-700 transition duration-300 ease-in-out p-8 rounded-lg w-full lg:w-1/3 shadow-lg z-10 flex flex-col items-center`} // Center the card contents
-					>
-						{/* Content */}
-						<img
-							src={experience.image}
-							alt={experience.companyName}
-							className="w-24 h-24 object-contain mb-4"
-						/>
-						<h3 className="text-2lg font-semibold text-center mb-2">
-							{experience.companyName}
-						</h3>
-						<h4 className="text-lg font-semibold text-blue-500 text-center mb-2">
-							{experience.role}
-						</h4>
-						<p className="text-center text-gray-400 mb-4">{experience.dates}</p>
-
-						{/* Scrollable Description Area */}
-						<div className="max-h-0 overflow-y-scroll custom-scrollbar transition-all duration-500 ease-in-out group-hover:max-h-96">
-							<ul className="text-white text-lg list-disc list-inside space-y-2">
+							{/* Description */}
+							<ul className="space-y-2 text-slate-700" aria-label="Key responsibilities and achievements">
 								{experience.description.map((point, idx) => (
-									<li key={idx}>{point}</li>
+									<li key={idx} className="flex gap-2">
+										<span className="text-blue-600 mt-1.5" aria-hidden="true">•</span>
+										<span>{point}</span>
+									</li>
 								))}
 							</ul>
-						</div>
-					</div>
-				))}
+						</article>
+					))}
+				</div>
 			</div>
-		</div>
+		</article>
 	);
 };
 

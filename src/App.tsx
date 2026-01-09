@@ -2,26 +2,49 @@ import LandingPage from "./components/landing-page";
 import Navbar from "./components/navbar";
 import Projects from "./components/projects";
 import ExperienceTimeline from "./components/work";
+import Skills from "./components/skills";
+import Background from "./components/background";
+import ErrorBoundary from "./components/error-boundary";
 
 function App() {
 	return (
-		<div className="bg-gradient-to-r from-slate-800 via-slate-900 to-black gradient-shift min-h-screen">
+		<div className="bg-white min-h-screen overflow-x-hidden">
+			{/* Skip link for keyboard users */}
+			<a href="#home" className="skip-link">
+				Skip to main content
+			</a>
 			<Navbar />
-			<div className="">
-				<section id="home" className="">
-					<LandingPage />
+			<main role="main" id="main-content">
+				<section id="home" aria-label="Introduction">
+					<ErrorBoundary sectionName="Introduction">
+						<LandingPage />
+					</ErrorBoundary>
 				</section>
 
-				<section id="experience" className="  text-white">
-					<ExperienceTimeline />
+				<section id="background" className="bg-gray-50" aria-label="Background and Education">
+					<ErrorBoundary sectionName="Background">
+						<Background />
+					</ErrorBoundary>
 				</section>
 
-				<section id="projects" className=" text-white">
-					<div className="flex justify-center items-center h-full">
+				<section id="experience" className="bg-white" aria-label="Work Experience">
+					<ErrorBoundary sectionName="Work Experience">
+						<ExperienceTimeline />
+					</ErrorBoundary>
+				</section>
+
+				<section id="projects" className="bg-gray-50" aria-label="Projects Portfolio">
+					<ErrorBoundary sectionName="Projects">
 						<Projects />
-					</div>
+					</ErrorBoundary>
 				</section>
-			</div>
+
+				<section id="skills" className="bg-white" aria-label="Technical Skills">
+					<ErrorBoundary sectionName="Skills">
+						<Skills />
+					</ErrorBoundary>
+				</section>
+			</main>
 		</div>
 	);
 }
